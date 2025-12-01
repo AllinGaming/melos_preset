@@ -8,7 +8,9 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     permissions:
-      contents: write
+      contents: read
+      pages: write
+      id-token: write
     steps:
       - uses: actions/checkout@v4
       - uses: subosito/flutter-action@v2
@@ -18,7 +20,15 @@ jobs:
         run: dart pub get
       - name: Bootstrap Melos workspace
         run: dart run melos bootstrap
+      - name: Build web
+        run: |
+          cd app/app_root
+          flutter test --coverage
+          flutter build web --release
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: app/app_root/build/web
       - name: Deploy to GitHub Pages
-        run: scripts/deploy_pages.sh
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        id: deployment
+        uses: actions/deploy-pages@v4

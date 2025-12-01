@@ -25,7 +25,7 @@ jobs:
       - name: Bootstrap Melos workspace
         run: dart run melos bootstrap
       - name: Analyze code
-        run: melos exec -- flutter analyze
+        run: dart run melos exec -- flutter analyze
       - name: Run widget tests with coverage
         run: |
           cd app/app_root
