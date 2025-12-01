@@ -24,7 +24,8 @@ jobs:
         run: |
           cd app/app_root
           flutter test --coverage
-          flutter build web --release
+          BASE_PATH="/${GITHUB_REPOSITORY#*/}/"
+          flutter build web --release --base-href "$BASE_PATH" --pwa-strategy offline-first
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:

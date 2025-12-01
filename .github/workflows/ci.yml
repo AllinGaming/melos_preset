@@ -13,7 +13,14 @@ jobs:
       - name: Secret scan (gitleaks)
         uses: gitleaks/gitleaks-action@v2
         with:
-          args: detect --source . --no-git -v
+          args: >
+            detect
+            --source .
+            --no-git
+            --redact
+            --report-format sarif
+            --report-path gitleaks.sarif
+            --config .gitleaks.toml
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
@@ -57,3 +64,8 @@ jobs:
         with:
           name: sbom
           path: sbom.cdx.json
+      - name: Upload gitleaks report
+        if: always()
+        uses: github/codeql-action/upload-sarif@v3
+        with:
+          sarif_file: gitleaks.sarif

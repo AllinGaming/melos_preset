@@ -31,7 +31,7 @@ Melos powered Flutter workspace that isolates an `app/app_root` application from
 
 ## CI & deployment
 - `.github/workflows/ci.yml` runs on pushes/pull requests: it checks out the repo, sets up Flutter, runs `dart run melos bootstrap`, analyzes `melos exec -- flutter analyze`, and executes `flutter test --coverage` inside `app/app_root`, uploading the resulting `coverage/lcov.info` as an artifact.
-- `.github/workflows/deploy.yml` triggers on `main` pushes, bootstraps the workspace, and runs `scripts/deploy_pages.sh` to test, build the web app, capture `lcov.info`, and publish the `build/web` tree to the `gh-pages` branch.
+- `.github/workflows/deploy.yml` triggers on `main` pushes, bootstraps the workspace, runs tests, builds the web app with a base href derived from the repo name (`/${repo}/`) for GitHub Pages, and publishes via `actions/deploy-pages`.
 
 ## Deployment script
 `./scripts/deploy_pages.sh` performs:

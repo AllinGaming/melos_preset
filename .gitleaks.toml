@@ -1,0 +1,14 @@
+[allowlist]
+  description = "Ignore generated and tooling dirs"
+  paths = [
+    "\.git/",
+    "build/",
+    "coverage/",
+    "\.dart_tool/",
+    "\.idea/",
+    "\.vscode/",
+    "\.melos/",
+    "app/app_root/build/",
+    "packages/.*/build/",
+    "sbom\.cdx\.json"
+  ]
