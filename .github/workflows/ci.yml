@@ -47,10 +47,11 @@ jobs:
           name: coverage
           path: app/app_root/coverage/lcov.info
       - name: Generate SBOM (CycloneDX)
-        uses: anchore/syft@v0.94.0
+        uses: anchore/sbom-action@v0.17.4
         with:
-          dir: .
-          output: sbom.cdx.json
+          path: .
+          format: cyclonedx-json
+          output-file: sbom.cdx.json
       - name: Upload SBOM
         uses: actions/upload-artifact@v4
         with:
