@@ -47,7 +47,7 @@ jobs:
           name: coverage
           path: app/app_root/coverage/lcov.info
       - name: Generate SBOM (CycloneDX)
-        uses: anchore/syft@v0.88.1
+        uses: anchore/syft@v0.94.0
         with:
           dir: .
           output: sbom.cdx.json
