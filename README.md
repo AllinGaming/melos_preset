@@ -1,8 +1,8 @@
 ## Melos preset
 [![Coverage](https://img.shields.io/badge/coverage-98%25-brightgreen)](app/app_root/coverage/lcov.info)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![Analysis](https://img.shields.io/badge/analysis-flutter%20analyze-blue)](https://github.com/allingaming/agy6/actions/workflows/ci.yml)
-[![Code Quality](https://img.shields.io/badge/code%20quality-lints%20%2B%20tests-brightgreen)](https://github.com/allingaming/agy6/actions/workflows/ci.yml)
+[![Analysis](https://img.shields.io/badge/analysis-flutter%20analyze-blue)](https://github.com/allingaming/melos_preset/actions/workflows/ci.yml)
+[![Code Quality](https://img.shields.io/badge/code%20quality-lints%20%2B%20tests-brightgreen)](https://github.com/allingaming/melos_preset/actions/workflows/ci.yml)
 [![GitHub](https://img.shields.io/github/stars/allingaming/melos_preset?style=social)](https://github.com/allingaming/melos_preset)
 
 Melos powered Flutter workspace that isolates an `app/app_root` application from reusable packages. The UI layer uses `go_router`, `flutter_bloc`/Cubits, and pushes a Retrofit/Dio/Freezed networking package through the `packages/networking` library so the workspace demonstrates Melos-style separation.
