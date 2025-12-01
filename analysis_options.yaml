@@ -1,0 +1,14 @@
+include: package:flutter_lints/flutter.yaml
+
+analyzer:
+  errors:
+    todo: warning
+
+linter:
+  rules:
+    avoid_print: true
+    prefer_single_quotes: true
+    always_use_package_imports: true
+    avoid_dynamic_calls: true
+    avoid_function_literals_in_foreach_calls: true
+    avoid_type_to_string: true

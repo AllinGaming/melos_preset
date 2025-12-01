@@ -1,0 +1,23 @@
+# Dart / Flutter
+.dart_tool/
+.packages
+flutter_*.png
+flutter_export_environment.sh
+pubspec.lock
+
+# IntelliJ / VS Code
+.idea/
+.vscode/
+
+# Build outputs
+build/
+*.log
+
+# Melos
+.melos/
+
+# Coverage
+coverage/
+
+# macOS
+*.DS_Store

@@ -1,0 +1,14 @@
+name: agy6
+packages:
+  - app/**
+  - packages/**
+
+scripts:
+  bootstrap:
+    run: melos bootstrap
+  test:
+    run: melos exec --concurrency=1 -- flutter test
+  coverage:
+    run: melos exec --concurrency=1 -- flutter test --coverage
+  format:
+    run: dart format .

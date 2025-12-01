@@ -1,0 +1,58 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Secret scan (gitleaks)
+        uses: gitleaks/gitleaks-action@v2
+        with:
+          args: detect --source . --no-git -v
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+      - name: Install Dart dependencies
+        run: dart pub get
+      - name: Bootstrap Melos workspace
+        run: dart run melos bootstrap
+      - name: Analyze code
+        run: melos exec -- flutter analyze
+      - name: Run widget tests with coverage
+        run: |
+          cd app/app_root
+          flutter test --coverage
+      - name: Coverage summary
+        env:
+          COVERAGE_THRESHOLD: 90
+        run: python3 scripts/coverage_summary.py
+      - name: Upload coverage summary
+        uses: actions/upload-artifact@v4
+        if: success()
+        with:
+          name: coverage-summary
+          path: app/app_root/coverage/lcov.info
+      - name: Upload coverage report
+        uses: actions/upload-artifact@v4
+        if: success()
+        with:
+          name: coverage
+          path: app/app_root/coverage/lcov.info
+      - name: Generate SBOM (CycloneDX)
+        uses: anchore/syft@v0.88.1
+        with:
+          dir: .
+          output: sbom.cdx.json
+      - name: Upload SBOM
+        uses: actions/upload-artifact@v4
+        with:
+          name: sbom
+          path: sbom.cdx.json
